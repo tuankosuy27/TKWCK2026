@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - ViVuDN | Du Lịch Đà Nẵng</title>
+    <meta name="description" content="Đăng nhập vào ViVuDN để quản lý tour du lịch, đặt dịch vụ và nhận ưu đãi đặc biệt.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #198754;
+            --accent-color: #ffc107;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 1rem 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        .navbar-brand { font-weight: 700; font-size: 1.5rem; color: var(--primary-color) !important; }
+        .navbar-brand span { color: var(--secondary-color); }
+        .nav-link { font-weight: 500; padding: 0.5rem 1rem !important; transition: color 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+
+        /* Login Section */
+        .login-section {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.05), rgba(25, 135, 84, 0.05));
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 3rem 0;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .login-image {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)),
+                        url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600') center/cover;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            position: relative;
+        }
+        .login-image::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(0,0,0,0.3);
+        }
+        .login-image-content {
+            position: relative; z-index: 1; text-align: center; color: white;
+        }
+        .login-image-content h3 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+        .login-image-content p { opacity: 0.9; }
+
+        .login-form-container { padding: 3rem; }
+
+        .login-header { text-align: center; margin-bottom: 2rem; }
+        .login-header h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .login-header p { color: var(--text-light); }
+        .login-header p a { color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .login-header p a:hover { text-decoration: underline; }
+
+        .form-label { font-weight: 600; margin-bottom: 0.5rem; }
+        .form-control {
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+        }
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+        }
+
+        .form-check-label { color: var(--text-light); font-weight: 500; }
+        .form-check-input:checked { background-color: var(--primary-color); border-color: var(--primary-color); }
+
+        .btn-login {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 1rem;
+            border-radius: 12px;
+            border: none;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .btn-login:hover { background: #0b5ed7; transform: translateY(-2px); }
+
+        .divider {
+            display: flex; align-items: center;
+            margin: 1.5rem 0;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; height: 1px; background: #dee2e6;
+        }
+        .divider span {
+            padding: 0 1rem; color: var(--text-light); font-size: 0.9rem;
+        }
+
+        .social-login { display: flex; gap: 1rem; }
+        .social-btn {
+            flex: 1;
+            display: flex; align-items: center; justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            background: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .social-btn:hover { border-color: var(--text-dark); background: var(--bg-light); }
+
+        .forgot-password {
+            color: var(--primary-color); text-decoration: none; font-weight: 600;
+        }
+        .forgot-password:hover { text-decoration: underline; }
+
+        .remember-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .register-box {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .register-box p { margin: 0; color: var(--text-light); }
+        .register-box a { color: var(--primary-color); font-weight: 600; text-decoration: none; }
+        .register-box a:hover { text-decoration: underline; }
+
+        .back-home {
+            text-align: center; margin-top: 2rem;
+        }
+        .back-home a {
+            color: var(--text-light); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .back-home a:hover { color: var(--primary-color); }
+
+        /* Footer */
+        .footer { background: #1a1a2e; color: white; padding: 2rem 0; }
+        .footer-brand { font-size: 1.5rem; font-weight: 700; color: white; }
+        .footer-brand span { color: var(--primary-color); }
+        .footer-text { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin: 0; }
+
+        @media (max-width: 991px) {
+            .login-image { display: none; }
+            .login-form-container { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ViVu<span>DN</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gioi-thieu.html">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dich-vu.html">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kham-pha.html">Khám phá</a></li>
+                    <li class="nav-item ms-lg-3"><a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt Tour</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="login-card">
+                        <div class="row g-0">
+                            <!-- Image Side -->
+                            <div class="col-lg-6">
+                                <div class="login-image">
+                                    <div class="login-image-content">
+                                        <h3>Chào Mừng Trở Lại!</h3>
+                                        <p>Đăng nhập để quản lý tour du lịch và nhận ưu đãi đặc biệt từ ViVuDN.</p>
+                                        <a href="index.html" class="btn btn-outline-light rounded-pill mt-3">
+                                            <i class="bi bi-arrow-left me-2"></i>Quay về trang chủ
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Form Side -->
+                            <div class="col-lg-6">
+                                <div class="login-form-container">
+                                    <div class="login-header">
+                                        <h2>Đăng Nhập</h2>
+                                        <p>Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
+                                    </div>
+
+                                    <form id="loginForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">Email hoặc Số điện thoại</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-white border-end-0">
+                                                    <i class="bi bi-envelope text-muted"></i>
+                                                </span>
+                                                <input type="text" class="form-control border-start-0" placeholder="email@example.com" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Mật khẩu</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-white border-end-0">
+                                                    <i class="bi bi-lock text-muted"></i>
+                                                </span>
+                                                <input type="password" class="form-control border-start-0" placeholder="Nhập mật khẩu" required>
+                                                <button class="btn btn-outline-secondary border-start-0" type="button" id="togglePassword">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="remember-row">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="remember">
+                                                <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
+                                            </div>
+                                            <a href="#" class="forgot-password">Quên mật khẩu?</a>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-login">
+                                            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng Nhập
+                                        </button>
+                                    </form>
+
+                                    <div class="divider">
+                                        <span>hoặc</span>
+                                    </div>
+
+                                    <div class="social-login">
+                                        <button type="button" class="social-btn">
+                                            <i class="bi bi-google text-danger"></i>
+                                            Google
+                                        </button>
+                                        <button type="button" class="social-btn">
+                                            <i class="bi bi-facebook text-primary"></i>
+                                            Facebook
+                                        </button>
+                                    </div>
+
+                                    <div class="register-box">
+                                        <p>Đăng ký thành viên để nhận:</p>
+                                        <ul class="text-start px-4 mb-0" style="font-size: 0.9rem;">
+                                            <li>Ưu đãi đặc biệt cho thành viên</li>
+                                            <li>Theo dõi đơn tour dễ dàng</li>
+                                            <li>Tích điểm đổi quà hấp dẫn</li>
+                                        </ul>
+                                        <a href="register.html" class="btn btn-primary rounded-pill mt-3">
+                                            Đăng Ký Miễn Phí
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div class="footer-brand">ViVu<span>DN</span></div>
+                <p class="footer-text mb-0">© 2024 ViVuDN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = this.parentElement.querySelector('input');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+
+        // Login form submit
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Đăng nhập thành công! Chào mừng bạn đến với ViVuDN.');
+        });
+    </script>
+</body>
+</html>

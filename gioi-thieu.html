@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu - ViVuDN | Du Lịch Đà Nẵng</title>
+    <meta name="description" content="Tìm hiểu về ViVuDN - đơn vị du lịch Đà Nẵng uy tín với hơn 10 năm kinh nghiệm.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #198754;
+            --accent-color: #ffc107;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--text-dark); }
+
+        .navbar { padding: 1rem 0; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+        .navbar-brand { font-weight: 700; font-size: 1.5rem; color: var(--primary-color) !important; }
+        .navbar-brand span { color: var(--secondary-color); }
+        .nav-link { font-weight: 500; padding: 0.5rem 1rem !important; transition: color 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(25, 135, 84, 0.8)),
+                        url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=1920') center/cover;
+            padding: 100px 0;
+            position: relative;
+        }
+        .page-header::before {
+            content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+        }
+        .page-header h1 { position: relative; z-index: 1; font-size: 2.5rem; font-weight: 700; }
+        .breadcrumb { position: relative; z-index: 1; background: transparent; }
+        .breadcrumb-item a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .breadcrumb-item.active { color: white; }
+
+        .section-padding { padding: 5rem 0; }
+        .section-title { font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; }
+
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        .stat-number { font-size: 3rem; font-weight: 700; color: var(--primary-color); }
+        .stat-label { color: var(--text-light); font-size: 1rem; }
+
+        .value-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        .value-card:hover { transform: translateY(-5px); }
+        .value-icon {
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; margin: 0 auto 1.5rem;
+        }
+
+        .team-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        .team-card img { width: 100%; height: 280px; object-fit: cover; }
+        .team-info { padding: 1.5rem; text-align: center; }
+        .team-name { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .team-role { color: var(--text-light); font-size: 0.9rem; }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 4rem 0;
+        }
+
+        .footer { background: #1a1a2e; color: white; padding: 4rem 0 2rem; }
+        .footer-brand { font-size: 1.75rem; font-weight: 700; color: white; }
+        .footer-brand span { color: var(--primary-color); }
+        .footer-text { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+        .footer-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: white; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary-color); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(255,255,255,0.1); display: flex;
+            align-items: center; justify-content: center; color: white;
+            transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--primary-color); transform: translateY(-5px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ViVu<span>DN</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gioi-thieu.html">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dich-vu.html">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kham-pha.html">Khám phá</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tim-du-thuyen.html">Tìm du thuyền</a></li>
+                    <li class="nav-item ms-lg-3"><a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt Tour</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="text-white mb-3">Giới Thiệu Về ViVuDN</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Giới thiệu</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800" alt="Đà Nẵng">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Đồng Hành Cùng Bạn Khám Phá Đà Nẵng</h2>
+                    <p class="mb-4">
+                        <strong>ViVuDN</strong> là đơn vị du lịch uy tín tại Đà Nẵng với hơn 10 năm kinh nghiệm trong việc thiết kế và điều hành các tour du lịch đặc biệt. Chúng tôi tự hào là cầu nối đưa du khách đến với vẻ đẹp đa dạng của thành phố đáng sống nhất Việt Nam.
+                    </p>
+                    <p class="mb-4">
+                        Với đội ngũ hướng dẫn viên địa phương nhiệt tình, am hiểu sâu về văn hóa và địa điểm du lịch Đà Nẵng, ViVuDN cam kết mang đến những trải nghiệm chân thực, khác biệt và đáng nhớ nhất cho mỗi khách hàng.
+                    </p>
+                    <p>
+                        Không chỉ là một công ty du lịch, chúng tôi muốn trở thành người bạn đồng hành tin cậy, giúp bạn khám phá <strong>đà nẵng có gì chơi</strong> và tạo nên những kỷ niệm đẹp nhất trong hành trình của mình.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Năm kinh nghiệm</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Khách hàng</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Tour đa dạng</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">4.9/5</div>
+                        <div class="stat-label">Đánh giá trung bình</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Giá Trị Cốt Lõi Của ViVuDN</h2>
+                <p class="text-muted">Những nguyên tắc hướng dẫn mọi hoạt động của chúng tôi</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon" style="background: rgba(13, 110, 253, 0.1); color: #0d6efd;">
+                            <i class="bi bi-heart"></i>
+                        </div>
+                        <h4>Tận Tâm</h4>
+                        <p class="text-muted">Luôn đặt trải nghiệm khách hàng lên hàng đầu, lắng nghe và đáp ứng mọi nhu cầu.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon" style="background: rgba(25, 135, 84, 0.1); color: #198754;">
+                            <i class="bi bi-award"></i>
+                        </div>
+                        <h4>Chất Lượng</h4>
+                        <p class="text-muted">Cam kết mang đến dịch vụ tốt nhất với tiêu chuẩn cao nhất cho mọi tour du lịch.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-icon" style="background: rgba(255, 193, 7, 0.1); color: #d99e0e;">
+                            <i class="bi bi-lightbulb"></i>
+                        </div>
+                        <h4>Đổi Mới</h4>
+                        <p class="text-muted">Không ngừng cải tiến, tạo ra những trải nghiệm mới lạ và độc đáo cho khách hàng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Đội Ngũ Của Chúng Tôi</h2>
+                <p class="text-muted">Những con người tận tâm đồng hành cùng bạn</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 col-sm-6">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" alt="Team member">
+                        <div class="team-info">
+                            <h5 class="team-name">Nguyễn Văn A</h5>
+                            <p class="team-role">Giám đốc điều hành</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" alt="Team member">
+                        <div class="team-info">
+                            <h5 class="team-name">Trần Thị B</h5>
+                            <p class="team-role">Trưởng phòng kinh doanh</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="team-card">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400" alt="Team member">
+                        <div class="team-info">
+                            <h5 class="team-name">Lê Văn C</h5>
+                            <p class="team-role">Trưởng đoàn hướng dẫn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="text-white mb-3">Sẵn Sàng Cùng ViVuDN Khám Phá?</h2>
+            <p class="text-white-50 mb-4">Hãy liên hệ ngay để được tư vấn miễn phí!</p>
+            <a href="dat-tour.html" class="btn btn-light btn-lg rounded-pill px-4">
+                <i class="bi bi-calendar-check me-2"></i>Đặt Tour Ngay
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">ViVu<span>DN</span></div>
+                    <p class="footer-text">Đồng hành cùng bạn khám phá Đà Nẵng — thành phố đáng sống nhất Việt Nam.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Dịch vụ</h5>
+                    <ul class="footer-links">
+                        <li><a href="dich-vu.html">Tour du lịch</a></li>
+                        <li><a href="tim-du-thuyen.html">Du thuyền</a></li>
+                        <li><a href="#">Lưu trú</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Liên kết</h5>
+                    <ul class="footer-links">
+                        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+                        <li><a href="kham-pha.html">Khám phá</a></li>
+                        <li><a href="lien-he.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="footer-title">Liên hệ</h5>
+                    <ul class="footer-links">
+                        <li><i class="bi bi-geo-alt me-2"></i>Đà Nẵng, Việt Nam</li>
+                        <li><i class="bi bi-telephone me-2"></i>+84 xxx xxx xxx</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@vivudn.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ViVuDN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

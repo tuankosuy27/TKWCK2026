@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm du thuyền - ViVuDN | Du Lịch Đà Nẵng</title>
+    <meta name="description" content="Đặt du thuyền Đà Nẵng: du thuyền sang trọng, câu cá, ngắm hoàng hôn, tắm biển.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #198754;
+            --accent-color: #ffc107;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--text-dark); }
+
+        .navbar { padding: 1rem 0; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+        .navbar-brand { font-weight: 700; font-size: 1.5rem; color: var(--primary-color) !important; }
+        .navbar-brand span { color: var(--secondary-color); }
+        .nav-link { font-weight: 500; padding: 0.5rem 1rem !important; transition: color 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(25, 135, 84, 0.8)),
+                        url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920') center/cover;
+            padding: 100px 0; position: relative;
+        }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
+        .page-header h1 { position: relative; z-index: 1; font-size: 2.5rem; font-weight: 700; }
+        .page-header p { position: relative; z-index: 1; }
+
+        .section-padding { padding: 5rem 0; }
+        .section-title { font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; }
+
+        .yacht-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .yacht-card:hover { transform: translateY(-10px); }
+        .yacht-image { height: 250px; overflow: hidden; position: relative; }
+        .yacht-image img { width: 100%; height: 100%; object-fit: cover; }
+        .yacht-badge {
+            position: absolute; top: 1rem; left: 1rem;
+            background: var(--secondary-color); color: white;
+            padding: 0.4rem 1rem; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 600;
+        }
+        .yacht-content { padding: 1.5rem; }
+        .yacht-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .yacht-meta {
+            display: flex; gap: 1rem; flex-wrap: wrap;
+            color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;
+        }
+        .yacht-meta span { display: flex; align-items: center; gap: 0.25rem; }
+        .yacht-desc { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .yacht-features {
+            display: flex; gap: 1rem; flex-wrap: wrap;
+            margin-bottom: 1.5rem; padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .yacht-feature {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.85rem; color: var(--text-light);
+        }
+        .yacht-feature i { color: var(--secondary-color); }
+        .yacht-price {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .price { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+        .price span { font-size: 0.9rem; font-weight: 400; color: var(--text-light); }
+
+        .filter-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        .form-label { font-weight: 600; margin-bottom: 0.5rem; }
+        .form-select, .form-control {
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+        }
+        .form-select:focus, .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
+        }
+
+        .feature-box {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        .feature-icon {
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; margin: 0 auto 1rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 4rem 0;
+        }
+
+        .footer { background: #1a1a2e; color: white; padding: 4rem 0 2rem; }
+        .footer-brand { font-size: 1.75rem; font-weight: 700; color: white; }
+        .footer-brand span { color: var(--primary-color); }
+        .footer-text { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+        .footer-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: white; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary-color); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(255,255,255,0.1); display: flex;
+            align-items: center; justify-content: center; color: white;
+            transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--primary-color); transform: translateY(-5px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ViVu<span>DN</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gioi-thieu.html">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dich-vu.html">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kham-pha.html">Khám phá</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="tim-du-thuyen.html">Tìm du thuyền</a></li>
+                    <li class="nav-item ms-lg-3"><a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt Tour</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container text-center">
+            <h1 class="text-white mb-3">Trải Nghiệm Du Thuyền Đà Nẵng</h1>
+            <p class="text-white">Khám phá vịnh biển tuyệt đẹp trên du thuyền sang trọng cùng ViVuDN</p>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="filter-section">
+                <form class="row g-4">
+                    <div class="col-md-3">
+                        <label class="form-label">Loại du thuyền</label>
+                        <select class="form-select">
+                            <option selected>Tất cả</option>
+                            <option>Du thuyền cao cấp</option>
+                            <option>Du thuyền trung cấp</option>
+                            <option>Thuyền câu cá</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Số khách</label>
+                        <select class="form-select">
+                            <option selected>Tất cả</option>
+                            <option>2-4 người</option>
+                            <option>5-10 người</option>
+                            <option>10-20 người</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Thời gian</label>
+                        <select class="form-select">
+                            <option selected>Tất cả</option>
+                            <option>2 giờ</option>
+                            <option>4 giờ</option>
+                            <option>1 ngày</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary w-100 rounded-pill">
+                            <i class="bi bi-search me-2"></i>Tìm kiếm
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Yacht List -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Danh Sách Du Thuyền</h2>
+                <p class="text-muted">Lựa chọn du thuyền phù hợp với nhu cầu của bạn</p>
+            </div>
+            <div class="row g-4">
+                <!-- Yacht 1 -->
+                <div class="col-lg-6">
+                    <div class="yacht-card">
+                        <div class="yacht-image">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800" alt="Du thuyền VIP">
+                            <span class="yacht-badge">Bán chạy</span>
+                        </div>
+                        <div class="yacht-content">
+                            <h3 class="yacht-title">Du Thuyền VIP Sunset</h3>
+                            <div class="yacht-meta">
+                                <span><i class="bi bi-people"></i> 10 khách</span>
+                                <span><i class="bi bi-clock"></i> 4 giờ</span>
+                                <span><i class="bi bi-geo-alt"></i> Vịnh Đà Nẵng</span>
+                            </div>
+                            <p class="yacht-desc">
+                                Trải nghiệm hoàng hôn tuyệt đẹp trên du thuyền sang trọng với dịch vụ cao cấp, bao gồm đồ ăn, đồ uống và các hoạt động trên biển.
+                            </p>
+                            <div class="yacht-features">
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Đồ ăn & Đồ uống</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Tắm biển</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Câu cá</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Karaoke</span>
+                            </div>
+                            <div class="yacht-price">
+                                <div class="price">8,500,000 <span>đ/boat</span></div>
+                                <a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Yacht 2 -->
+                <div class="col-lg-6">
+                    <div class="yacht-card">
+                        <div class="yacht-image">
+                            <img src="https://images.unsplash.com/photo-1520250497591-112f2fdc0149a?w=800" alt="Du thuyền cao cấp">
+                            <span class="yacht-badge" style="background: var(--accent-color);">Ưu đãi</span>
+                        </div>
+                        <div class="yacht-content">
+                            <h3 class="yacht-title">Du Thuyền Luxury 5 Sao</h3>
+                            <div class="yacht-meta">
+                                <span><i class="bi bi-people"></i> 20 khách</span>
+                                <span><i class="bi bi-clock"></i> 8 giờ</span>
+                                <span><i class="bi bi-geo-alt"></i> Hòn Lao</span>
+                            </div>
+                            <p class="yacht-desc">
+                                Du thuyền cao cấp 5 sao với đầy đủ tiện nghi. Khám phá đảo Hòn Lao, tắm biển, lặn ngắm san hô và thưởng thức hải sản tươi ngon.
+                            </p>
+                            <div class="yacht-features">
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Bữa trưa hải sản</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Lặn san hô</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Kayak</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Hướng dẫn viên</span>
+                            </div>
+                            <div class="yacht-price">
+                                <div class="price">15,000,000 <span>đ/boat</span></div>
+                                <a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Yacht 3 -->
+                <div class="col-lg-6">
+                    <div class="yacht-card">
+                        <div class="yacht-image">
+                            <img src="https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=800" alt="Thuyền câu cá">
+                        </div>
+                        <div class="yacht-content">
+                            <h3 class="yacht-title">Thuyền Câu Cá Chuyên Nghiệp</h3>
+                            <div class="yacht-meta">
+                                <span><i class="bi bi-people"></i> 6 khách</span>
+                                <span><i class="bi bi-clock"></i> 6 giờ</span>
+                                <span><i class="bi bi-geo-alt"></i> Biển Đà Nẵng</span>
+                            </div>
+                            <p class="yacht-desc">
+                                Trải nghiệm câu cá cùng ngư dân địa phương. Phù hợp cho gia đình và nhóm bạn muốn trải nghiệm cuộc sống biển chân thực.
+                            </p>
+                            <div class="yacht-features">
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Dụng cụ câu cá</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Hướng dẫn viên</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Đồ ăn nhẹ</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Nước uống</span>
+                            </div>
+                            <div class="yacht-price">
+                                <div class="price">3,500,000 <span>đ/boat</span></div>
+                                <a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Yacht 4 -->
+                <div class="col-lg-6">
+                    <div class="yacht-card">
+                        <div class="yacht-image">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800" alt="Du thuyền gia đình">
+                        </div>
+                        <div class="yacht-content">
+                            <h3 class="yacht-title">Du Thuyền Gia Đình</h3>
+                            <div class="yacht-meta">
+                                <span><i class="bi bi-people"></i> 8 khách</span>
+                                <span><i class="bi bi-clock"></i> 3 giờ</span>
+                                <span><i class="bi bi-geo-alt"></i> Cảng Sông Hàn</span>
+                            </div>
+                            <p class="yacht-desc">
+                                Lý tưởng cho gia đình với không gian rộng rãi, an toàn cho trẻ em. Ngắm cảnh thành phố từ biển và tận hưởng không khí mát lành.
+                            </p>
+                            <div class="yacht-features">
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> An toàn trẻ em</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Đồ uống</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Chụp ảnh</span>
+                                <span class="yacht-feature"><i class="bi bi-check-circle"></i> Wifi</span>
+                            </div>
+                            <div class="yacht-price">
+                                <div class="price">5,500,000 <span>đ/boat</span></div>
+                                <a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Trải Nghiệm Đặc Biệt</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon" style="background: rgba(13, 110, 253, 0.1); color: #0d6efd;">
+                            <i class="bi bi-sunrise"></i>
+                        </div>
+                        <h4>Ngắm Hoàng Hôn</h4>
+                        <p class="text-muted">Trải nghiệm khoảnh khắc hoàng hôn tuyệt đẹp trên biển Đà Nẵng</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon" style="background: rgba(25, 135, 84, 0.1); color: #198754;">
+                            <i class="bi bi-water"></i>
+                        </div>
+                        <h4>Tắm Biển & Lặn</h4>
+                        <p class="text-muted">Tắm biển tại các đảo hoang sơ và lặn ngắm san hô rực rỡ</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon" style="background: rgba(255, 193, 7, 0.1); color: #d99e0e;">
+                            <i class="bi bi-fish"></i>
+                        </div>
+                        <h4>Câu Cá Cùng Ngư Dân</h4>
+                        <p class="text-muted">Trải nghiệm đánh bắt hải sản cùng ngư dân địa phương</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="text-white mb-3">Đặt Du Thuyền Ngay</h2>
+            <p class="text-white-50 mb-4">Liên hệ ViVuDN để được tư vấn và đặt du thuyền phù hợp nhất!</p>
+            <a href="dat-tour.html" class="btn btn-light btn-lg rounded-pill px-4">
+                <i class="bi bi-calendar-check me-2"></i>Đặt Ngay
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">ViVu<span>DN</span></div>
+                    <p class="footer-text">Đồng hành cùng bạn khám phá Đà Nẵng — thành phố đáng sống nhất Việt Nam.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Dịch vụ</h5>
+                    <ul class="footer-links">
+                        <li><a href="dich-vu.html">Tour du lịch</a></li>
+                        <li><a href="tim-du-thuyen.html">Du thuyền</a></li>
+                        <li><a href="#">Lưu trú</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Liên kết</h5>
+                    <ul class="footer-links">
+                        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+                        <li><a href="kham-pha.html">Khám phá</a></li>
+                        <li><a href="lien-he.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="footer-title">Liên hệ</h5>
+                    <ul class="footer-links">
+                        <li><i class="bi bi-geo-alt me-2"></i>Đà Nẵng, Việt Nam</li>
+                        <li><i class="bi bi-telephone me-2"></i>+84 xxx xxx xxx</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@vivudn.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ViVuDN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

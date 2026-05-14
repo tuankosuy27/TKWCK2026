@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Tour - ViVuDN | Du Lịch Đà Nẵng</title>
+    <meta name="description" content="Đặt tour du lịch Đà Nẵng, Bà Nà Hills, Hội An, Ngũ Hành Sơn. Lịch trình tùy chỉnh, giá tốt nhất.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #198754;
+            --accent-color: #ffc107;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--text-dark); }
+
+        .navbar { padding: 1rem 0; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+        .navbar-brand { font-weight: 700; font-size: 1.5rem; color: var(--primary-color) !important; }
+        .navbar-brand span { color: var(--secondary-color); }
+        .nav-link { font-weight: 500; padding: 0.5rem 1rem !important; transition: color 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(25, 135, 84, 0.8)),
+                        url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=1920') center/cover;
+            padding: 100px 0; position: relative;
+        }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
+        .page-header h1 { position: relative; z-index: 1; font-size: 2.5rem; font-weight: 700; }
+        .page-header p { position: relative; z-index: 1; }
+        .breadcrumb { position: relative; z-index: 1; background: transparent; }
+        .breadcrumb-item a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .breadcrumb-item.active { color: white; }
+
+        .section-padding { padding: 5rem 0; }
+        .section-title { font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; }
+
+        .booking-form {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        .form-label { font-weight: 600; margin-bottom: 0.5rem; }
+        .form-control, .form-select {
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+        }
+        .form-section {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-section-title {
+            font-weight: 700; font-size: 1.1rem;
+            margin-bottom: 1rem; color: var(--primary-color);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .form-check-input:checked { background-color: var(--primary-color); border-color: var(--primary-color); }
+
+        .tour-option {
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .tour-option:hover, .tour-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(13, 110, 253, 0.05);
+        }
+        .tour-option i { font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .tour-option h6 { font-weight: 600; margin-bottom: 0.25rem; }
+        .tour-option p { font-size: 0.85rem; color: var(--text-light); margin: 0; }
+
+        .price-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            position: sticky; top: 100px;
+        }
+        .price-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .price-row {
+            display: flex; justify-content: space-between;
+            padding: 0.75rem 0; border-bottom: 1px solid #eee;
+        }
+        .price-row:last-child { border-bottom: none; font-weight: 700; font-size: 1.1rem; }
+        .price-total { color: var(--primary-color); font-size: 1.5rem; }
+
+        .step-indicator {
+            display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem;
+        }
+        .step {
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .step-number {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: #dee2e6; color: var(--text-light);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700;
+        }
+        .step.active .step-number { background: var(--primary-color); color: white; }
+        .step.completed .step-number { background: var(--secondary-color); color: white; }
+        .step-label { font-weight: 600; color: var(--text-light); }
+        .step.active .step-label { color: var(--primary-color); }
+
+        .success-icon {
+            width: 100px; height: 100px; border-radius: 50%;
+            background: rgba(25, 135, 84, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; color: var(--secondary-color);
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer { background: #1a1a2e; color: white; padding: 4rem 0 2rem; }
+        .footer-brand { font-size: 1.75rem; font-weight: 700; color: white; }
+        .footer-brand span { color: var(--primary-color); }
+        .footer-text { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+        .footer-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: white; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary-color); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(255,255,255,0.1); display: flex;
+            align-items: center; justify-content: center; color: white;
+            transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--primary-color); transform: translateY(-5px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .step-indicator { flex-direction: column; gap: 1rem; align-items: flex-start; }
+            .step-indicator { padding-left: 2rem; }
+            .price-summary { position: static; margin-top: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ViVu<span>DN</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gioi-thieu.html">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dich-vu.html">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kham-pha.html">Khám phá</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tim-du-thuyen.html">Tìm du thuyền</a></li>
+                    <li class="nav-item ms-lg-3"><a href="dat-tour.html" class="btn btn-primary rounded-pill px-4 active">Đặt Tour</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="text-white mb-3">Đặt Tour Du Lịch Đà Nẵng</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Đặt Tour</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Chọn tour</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Thông tin</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Xác nhận</span>
+                </div>
+            </div>
+
+            <div class="row g-5">
+                <!-- Booking Form -->
+                <div class="col-lg-8">
+                    <form class="booking-form" id="bookingForm">
+                        <!-- Tour Selection -->
+                        <div class="form-section">
+                            <h5 class="form-section-title"><i class="bi bi-map"></i> Chọn Loại Tour</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="tour-option selected" onclick="selectTour(this, 'day')">
+                                        <i class="bi bi-sun"></i>
+                                        <h6>Tour 1 Ngày</h6>
+                                        <p>Khám phá nhanh</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="tour-option" onclick="selectTour(this, '2day')">
+                                        <i class="bi bi-calendar-range"></i>
+                                        <h6>Tour 2-3 Ngày</h6>
+                                        <p>Trải nghiệm sâu</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="tour-option" onclick="selectTour(this, 'custom')">
+                                        <i class="bi bi-sliders"></i>
+                                        <h6>Tour Tùy Chỉnh</h6>
+                                        <p>Lịch trình riêng</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Personal Info -->
+                        <div class="form-section">
+                            <h5 class="form-section-title"><i class="bi bi-person"></i> Thông Tin Cá Nhân</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Họ và tên *</label>
+                                    <input type="text" class="form-control" placeholder="Nguyễn Văn A" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Số điện thoại *</label>
+                                    <input type="tel" class="form-control" placeholder="+84 xxx xxx xxx" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" class="form-control" placeholder="email@example.com" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Số khách</label>
+                                    <select class="form-select">
+                                        <option selected>1 khách</option>
+                                        <option>2 khách</option>
+                                        <option>3-5 khách</option>
+                                        <option>6-10 khách</option>
+                                        <option>Trên 10 khách</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tour Details -->
+                        <div class="form-section">
+                            <h5 class="form-section-title"><i class="bi bi-calendar-event"></i> Thời Gian & Địa Điểm</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Ngày khởi hành *</label>
+                                    <input type="date" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Địa điểm đón</label>
+                                    <select class="form-select">
+                                        <option selected>Khách sạn ở Đà Nẵng</option>
+                                        <option>Sân bay Đà Nẵng</option>
+                                        <option>Biển Mỹ Khê</option>
+                                        <option>Khác</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Địa điểm muốn khám phá (đà nẵng có gì chơi)</label>
+                                    <div class="row g-2">
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="bana">
+                                                <label class="form-check-label" for="bana">Bà Nà Hills</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="nui">
+                                                <label class="form-check-label" for="nui">Ngũ Hành Sơn</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="bien">
+                                                <label class="form-check-label" for="bien">Biển Mỹ Khê</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="hoian">
+                                                <label class="form-check-label" for="hoian">Hội An</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="thuyen">
+                                                <label class="form-check-label" for="thuyen">Du thuyền</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Requests -->
+                        <div class="form-section">
+                            <h5 class="form-section-title"><i class="bi bi-chat-dots"></i> Yêu Cầu Thêm</h5>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Ghi chú đặc biệt</label>
+                                    <textarea class="form-control" rows="4" placeholder="Bạn có yêu cầu đặc biệt nào không? Ví dụ: ăn kiêng, di chuyển cho người khuyết tật,..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">
+                            <i class="bi bi-check-circle me-2"></i>Xác Nhận Đặt Tour
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Price Summary -->
+                <div class="col-lg-4">
+                    <div class="price-summary">
+                        <h4 class="price-title">Tóm Tắt Đơn</h4>
+                        <div class="price-row">
+                            <span>Loại tour</span>
+                            <span>Tour 1 Ngày</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Số khách</span>
+                            <span>1 khách</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Ngày khởi hành</span>
+                            <span>---</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Giá tour</span>
+                            <span>Liên hệ</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Phí dịch vụ</span>
+                            <span>Miễn phí</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Tổng cộng</span>
+                            <span class="price-total">Liên hệ</span>
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-muted small mb-0">
+                                <i class="bi bi-shield-check me-1"></i> Đặt tour an toàn, hoàn tiền nếu hủy trước 24h
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded-3 shadow-sm">
+                        <i class="bi bi-telephone fs-2 text-primary mb-3"></i>
+                        <h5>Hotline 24/7</h5>
+                        <p class="text-muted mb-0">+84 xxx xxx xxx</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded-3 shadow-sm">
+                        <i class="bi bi-envelope fs-2 text-primary mb-3"></i>
+                        <h5>Email</h5>
+                        <p class="text-muted mb-0">info@vivudn.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded-3 shadow-sm">
+                        <i class="bi bi-chat-dots fs-2 text-primary mb-3"></i>
+                        <h5>Zalo</h5>
+                        <p class="text-muted mb-0">+84 xxx xxx xxx</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">ViVu<span>DN</span></div>
+                    <p class="footer-text">Đồng hành cùng bạn khám phá Đà Nẵng — thành phố đáng sống nhất Việt Nam.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Dịch vụ</h5>
+                    <ul class="footer-links">
+                        <li><a href="dich-vu.html">Tour du lịch</a></li>
+                        <li><a href="tim-du-thuyen.html">Du thuyền</a></li>
+                        <li><a href="#">Lưu trú</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Liên kết</h5>
+                    <ul class="footer-links">
+                        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+                        <li><a href="kham-pha.html">Khám phá</a></li>
+                        <li><a href="lien-he.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="footer-title">Liên hệ</h5>
+                    <ul class="footer-links">
+                        <li><i class="bi bi-geo-alt me-2"></i>Đà Nẵng, Việt Nam</li>
+                        <li><i class="bi bi-telephone me-2"></i>+84 xxx xxx xxx</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@vivudn.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ViVuDN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectTour(element, type) {
+            document.querySelectorAll('.tour-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cảm ơn bạn đã đặt tour! Đội ngũ ViVuDN sẽ liên hệ trong vòng 24 giờ.');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khám phá - ViVuDN | Du Lịch Đà Nẵng</title>
+    <meta name="description" content="Khám phá các địa điểm du lịch hấp dẫn tại Đà Nẵng: Bà Nà Hills, Ngũ Hành Sơn, biển Mỹ Khê, ẩm thực địa phương.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #198754;
+            --accent-color: #ffc107;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+        }
+        body { font-family: 'Be Vietnam Pro', sans-serif; color: var(--text-dark); }
+
+        .navbar { padding: 1rem 0; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+        .navbar-brand { font-weight: 700; font-size: 1.5rem; color: var(--primary-color) !important; }
+        .navbar-brand span { color: var(--secondary-color); }
+        .nav-link { font-weight: 500; padding: 0.5rem 1rem !important; transition: color 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(25, 135, 84, 0.8)),
+                        url('https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=1920') center/cover;
+            padding: 100px 0; position: relative;
+        }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
+        .page-header h1 { position: relative; z-index: 1; font-size: 2.5rem; font-weight: 700; }
+        .breadcrumb { position: relative; z-index: 1; background: transparent; }
+        .breadcrumb-item a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .breadcrumb-item.active { color: white; }
+
+        .section-padding { padding: 5rem 0; }
+        .section-title { font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; }
+
+        .explore-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            cursor: pointer;
+        }
+        .explore-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .explore-card:hover img { transform: scale(1.1); }
+        .explore-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
+        }
+        .explore-badge {
+            position: absolute; top: 1rem; right: 1rem;
+            background: var(--accent-color); color: var(--text-dark);
+            padding: 0.5rem 1rem; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 600;
+        }
+        .explore-title { color: white; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .explore-text { color: rgba(255,255,255,0.85); font-size: 0.95rem; margin-bottom: 1rem; }
+        .explore-meta { display: flex; gap: 1rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+        .explore-meta span { display: flex; align-items: center; gap: 0.25rem; }
+
+        .location-card {
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .location-card:hover { transform: translateY(-5px); }
+        .location-card img { width: 100%; height: 180px; object-fit: cover; }
+        .location-content { padding: 1.25rem; }
+        .location-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .location-text { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; }
+        .location-link { color: var(--primary-color); text-decoration: none; font-weight: 600; }
+        .location-link:hover { text-decoration: underline; }
+
+        .filter-btn {
+            border: 2px solid #dee2e6;
+            background: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .food-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .food-card img { width: 100%; height: 200px; object-fit: cover; }
+        .food-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 1.5rem 1rem 1rem;
+        }
+        .food-name { color: white; font-weight: 600; font-size: 1.1rem; margin: 0; }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 4rem 0;
+        }
+
+        .footer { background: #1a1a2e; color: white; padding: 4rem 0 2rem; }
+        .footer-brand { font-size: 1.75rem; font-weight: 700; color: white; }
+        .footer-brand span { color: var(--primary-color); }
+        .footer-text { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+        .footer-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1.25rem; color: white; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary-color); }
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(255,255,255,0.1); display: flex;
+            align-items: center; justify-content: center; color: white;
+            transition: all 0.3s;
+        }
+        .social-links a:hover { background: var(--primary-color); transform: translateY(-5px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 3rem; text-align: center; color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .explore-card { height: 320px; }
+            .explore-title { font-size: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ViVu<span>DN</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gioi-thieu.html">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dich-vu.html">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="kham-pha.html">Khám phá</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tim-du-thuyen.html">Tìm du thuyền</a></li>
+                    <li class="nav-item ms-lg-3"><a href="dat-tour.html" class="btn btn-primary rounded-pill px-4">Đặt Tour</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="text-white mb-3">Khám Phá Đà Nẵng</h1>
+            <p class="text-white-50 mb-0" style="position: relative; z-index: 1;">
+                <strong>Đà nẵng có gì chơi</strong>? Khám phá ngay những địa điểm tuyệt vời nhất!
+            </p>
+        </div>
+    </div>
+
+    <!-- Filter -->
+    <section class="py-4 bg-light">
+        <div class="container">
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                <button class="filter-btn active">Tất cả</button>
+                <button class="filter-btn">Danh lam thắng cảnh</button>
+                <button class="filter-btn">Biển & Đảo</button>
+                <button class="filter-btn">Văn hóa & Lịch sử</button>
+                <button class="filter-btn">Ẩm thực</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Places -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Địa Điểm Nổi Bật</h2>
+                <p class="text-muted">Khám phá những nơi không thể bỏ lỡ khi đến Đà Nẵng</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="explore-card">
+                        <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800" alt="Bà Nà Hills">
+                        <span class="explore-badge">Nổi bật nhất</span>
+                        <div class="explore-overlay">
+                            <h3 class="explore-title">Bà Nà Hills</h3>
+                            <p class="explore-text">Khu du lịch núi Châu Âu thu nhỏ với cầu Vàng huyền thoại, khu vui chơi Fantasy Park, và vườn hoa muồng đẹp mê li.</p>
+                            <div class="explore-meta">
+                                <span><i class="bi bi-clock"></i> 1 ngày</span>
+                                <span><i class="bi bi-geo-alt"></i> Huyện Hòa Vang</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="explore-card mb-4">
+                        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=600" alt="Ngũ Hành Sơn">
+                        <div class="explore-overlay">
+                            <h3 class="explore-title">Ngũ Hành Sơn</h3>
+                            <p class="explore-text">Năm ngọn núi đá vôi với hang động, chùa linh ứng.</p>
+                        </div>
+                    </div>
+                    <div class="explore-card">
+                        <img src="https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=600" alt="Biển Mỹ Khê">
+                        <div class="explore-overlay">
+                            <h3 class="explore-title">Biển Mỹ Khê</h3>
+                            <p class="explore-text">Bãi biển đẹp nhất thế giới với cát trắng mịn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- More Locations -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Khám Phá Thêm</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="location-card">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2fdc0149a?w=600" alt="Non Nước">
+                        <div class="location-content">
+                            <h4 class="location-title">Bãi Biển Non Nước</h4>
+                            <p class="location-text">Bãi biển hoang sơ yên tĩnh, lý tưởng cho những ai muốn tránh đám đông.</p>
+                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="location-card">
+                        <img src="https://images.unsplash.com/photo-1555990531-1c4c7f2a3b1e?w=600" alt="Chùa Linh Ứng">
+                        <div class="location-content">
+                            <h4 class="location-title">Chùa Linh Ứng</h4>
+                            <p class="location-text">Ngôi chùa nổi tiếng với tượng Phật Bà Quan Âm cao 67m.</p>
+                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="location-card">
+                        <img src="https://images.unsplash.com/photo-1560508180-03f285bc6758?w=600" alt="Cầu Rồng">
+                        <div class="location-content">
+                            <h4 class="location-title">Cầu Rồng Đà Nẵng</h4>
+                            <p class="location-text">Biểu tượng của thành phố với màn phun lửa nước vào thứ 7, CN.</p>
+                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="location-card">
+                        <img src="https://images.unsplash.com/photo-1555990531-1c4c7f2a3b1e?w=600" alt="Hội An">
+                        <div class="location-content">
+                            <h4 class="location-title">Phố Cổ Hội An</h4>
+                            <p class="location-text">Di sản thế giới UNESCO, cách Đà Nẵng 30km.</p>
+                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="location-card">
+                        <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=600" alt="Ẩm thực">
+                        <div class="location-content">
+                            <h4 class="location-title">Đặc Sản Đà Nẵng</h4>
+                            <p class="location-text">Bánh tráng cuốn, bún chả cá, mì Quảng...</p>
+                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="location-card">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600" alt="Du thuyền">
+                        <div class="location-content">
+                            <h4 class="location-title">Trải Nghiệm Biển</h4>
+                            <p class="location-text">Lặn ngắm san hô, câu cá, tắm biển cùng ViVuDN.</p>
+                            <a href="tim-du-thuyen.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Ẩm Thực Đà Nẵng</h2>
+                <p class="text-muted">Những món ăn không thể bỏ lỡ</p>
+            </div>
+            <div class="row g-3">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="food-card">
+                        <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=300" alt="Bánh tráng">
+                        <div class="food-overlay">
+                            <p class="food-name">Bánh Tráng</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="food-card">
+                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=300" alt="Bún chả cá">
+                        <div class="food-overlay">
+                            <p class="food-name">Bún Chả Cá</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="food-card">
+                        <img src="https://images.unsplash.com/photo-1581337202723-2818ed4e62f1?w=300" alt="Mì Quảng">
+                        <div class="food-overlay">
+                            <p class="food-name">Mì Quảng</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="food-card">
+                        <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=300" alt="Hải sản">
+                        <div class="food-overlay">
+                            <p class="food-name">Hải Sản</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="food-card">
+                        <img src="https://images.unsplash.com/photo-1603083163308-9654c3fb70b9?w=300" alt="Bánh xèo">
+                        <div class="food-overlay">
+                            <p class="food-name">Bánh Xèo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="food-card">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300" alt="Bánh mì">
+                        <div class="food-overlay">
+                            <p class="food-name">Bánh Mì</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="text-white mb-3">Khám Phá Cùng ViVuDN</h2>
+            <p class="text-white-50 mb-4">Đặt tour ngay để trải nghiệm trọn vẹn Đà Nẵng!</p>
+            <a href="dat-tour.html" class="btn btn-light btn-lg rounded-pill px-4">
+                <i class="bi bi-calendar-check me-2"></i>Đặt Tour Ngay
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">ViVu<span>DN</span></div>
+                    <p class="footer-text">Đồng hành cùng bạn khám phá Đà Nẵng — thành phố đáng sống nhất Việt Nam.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Dịch vụ</h5>
+                    <ul class="footer-links">
+                        <li><a href="dich-vu.html">Tour du lịch</a></li>
+                        <li><a href="tim-du-thuyen.html">Du thuyền</a></li>
+                        <li><a href="#">Lưu trú</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Liên kết</h5>
+                    <ul class="footer-links">
+                        <li><a href="gioi-thieu.html">Giới thiệu</a></li>
+                        <li><a href="kham-pha.html">Khám phá</a></li>
+                        <li><a href="lien-he.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="footer-title">Liên hệ</h5>
+                    <ul class="footer-links">
+                        <li><i class="bi bi-geo-alt me-2"></i>Đà Nẵng, Việt Nam</li>
+                        <li><i class="bi bi-telephone me-2"></i>+84 xxx xxx xxx</li>
+                        <li><i class="bi bi-envelope me-2"></i>info@vivudn.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ViVuDN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
