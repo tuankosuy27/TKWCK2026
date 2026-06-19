@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -69,166 +70,136 @@
                 <!-- Booking Form -->
                 <div class="col-lg-8">
                     <form class="booking-form" id="bookingForm">
-                        <!-- Tour Selection -->
-                        <div class="form-section">
-                            <h5 class="form-section-title"><i class="bi bi-map"></i> Chọn Loại Tour</h5>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <div class="tour-option selected" onclick="selectTour(this, 'day')">
-                                        <i class="bi bi-sun"></i>
-                                        <h6>Tour 1 Ngày</h6>
-                                        <p>Khám phá nhanh</p>
+                        <div id="step1" class="step-content active">
+                            <div class="form-section">
+                                <h5 class="form-section-title"><i class="bi bi-map"></i> Chọn Loại Tour</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="tour-option selected" onclick="selectTour(this, 'Tour 1 Ngày')">
+                                            <i class="bi bi-sun"></i>
+                                            <h6>Tour 1 Ngày</h6>
+                                            <p>Khám phá nhanh</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="tour-option" onclick="selectTour(this, '2day')">
-                                        <i class="bi bi-calendar-range"></i>
-                                        <h6>Tour 2-3 Ngày</h6>
-                                        <p>Trải nghiệm sâu</p>
+                                    <div class="col-md-4">
+                                        <div class="tour-option" onclick="selectTour(this, 'Tour 2-3 Ngày')">
+                                            <i class="bi bi-calendar-range"></i>
+                                            <h6>Tour 2-3 Ngày</h6>
+                                            <p>Trải nghiệm sâu</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="tour-option" onclick="selectTour(this, 'custom')">
-                                        <i class="bi bi-sliders"></i>
-                                        <h6>Tour Tùy Chỉnh</h6>
-                                        <p>Lịch trình riêng</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Personal Info -->
-                        <div class="form-section">
-                            <h5 class="form-section-title"><i class="bi bi-person"></i> Thông Tin Cá Nhân</h5>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Họ và tên *</label>
-                                    <input type="text" class="form-control" placeholder="Nguyễn Văn A" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Số điện thoại *</label>
-                                    <input type="tel" class="form-control" placeholder="+84 xxx xxx xxx" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Email *</label>
-                                    <input type="email" class="form-control" placeholder="email@example.com" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Số khách</label>
-                                    <select class="form-select">
-                                        <option selected>1 khách</option>
-                                        <option>2 khách</option>
-                                        <option>3-5 khách</option>
-                                        <option>6-10 khách</option>
-                                        <option>Trên 10 khách</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tour Details -->
-                        <div class="form-section">
-                            <h5 class="form-section-title"><i class="bi bi-calendar-event"></i> Thời Gian & Địa Điểm</h5>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Ngày khởi hành *</label>
-                                    <input type="date" class="form-control" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Địa điểm đón</label>
-                                    <select class="form-select">
-                                        <option selected>Khách sạn ở Đà Nẵng</option>
-                                        <option>Sân bay Đà Nẵng</option>
-                                        <option>Biển Mỹ Khê</option>
-                                        <option>Khác</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Địa điểm muốn khám phá (đà nẵng có gì chơi)</label>
-                                    <div class="row g-2">
-                                        <div class="col-auto">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="bana">
-                                                <label class="form-check-label" for="bana">Bà Nà Hills</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="nui">
-                                                <label class="form-check-label" for="nui">Ngũ Hành Sơn</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="bien">
-                                                <label class="form-check-label" for="bien">Biển Mỹ Khê</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="hoian">
-                                                <label class="form-check-label" for="hoian">Hội An</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="thuyen">
-                                                <label class="form-check-label" for="thuyen">Du thuyền</label>
-                                            </div>
+                                    <div class="col-md-4">
+                                        <div class="tour-option" onclick="selectTour(this, 'Tour Tùy Chỉnh')">
+                                            <i class="bi bi-sliders"></i>
+                                            <h6>Tour Tùy Chỉnh</h6>
+                                            <p>Lịch trình riêng</p>
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <input type="hidden" id="selectedTourType" value="Tour 1 Ngày">
+                                
                             </div>
+                            
+                            <button type="button" class="btn btn-primary w-100 rounded-pill mt-3" onclick="goToStep(2)">
+                                Tiếp tục <i class="bi bi-arrow-right"></i>
+                            </button>
                         </div>
 
-                        <!-- Additional Requests -->
-                        <div class="form-section">
-                            <h5 class="form-section-title"><i class="bi bi-chat-dots"></i> Yêu Cầu Thêm</h5>
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label">Ghi chú đặc biệt</label>
-                                    <textarea class="form-control" rows="4" placeholder="Bạn có yêu cầu đặc biệt nào không? Ví dụ: ăn kiêng, di chuyển cho người khuyết tật,..."></textarea>
+                        <div id="step2" class="step-content" style="display: none;">
+                            <div class="form-section">
+                                <h5 class="form-section-title"><i class="bi bi-person"></i> Thông Tin Đặt Tour</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Họ và tên *</label>
+                                        <input type="text" id="cusName" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Số điện thoại *</label>
+                                        <input type="tel" id="cusPhone" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" id="cusEmail" class="form-control" required>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label class="form-label">Ngày khởi hành *</label>
+                                        <input type="date" id="cusDate" class="form-control" onchange="updateSummary()" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Số khách</label>
+                                        <select class="form-select" id="cusGuests" onchange="updateSummary()">
+                                            <option value="1" selected>1 khách</option>
+                                            <option value="2">2 khách</option>
+                                            <option value="3">3 khách</option>
+                                            <option value="4">4 khách</option>
+                                            <option value="5">5 khách</option>
+                                        </select>
+                                    </div>
+                                    
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" onclick="goToStep(1)">Quay lại</button>
+                                <button type="button" class="btn btn-primary rounded-pill px-4" onclick="goToStep(3)">Tiếp tục</button>
+                            </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">
-                            <i class="bi bi-check-circle me-2"></i>Xác Nhận Đặt Tour
-                        </button>
+                        <div id="step3" class="step-content" style="display: none;">
+                            <div class="form-section text-center">
+                                <h5 class="form-section-title"><i class="bi bi-shield-lock"></i> Xác thực Email</h5>
+                                <p class="text-muted">Chúng tôi cần xác minh email của bạn trước khi đặt tour.</p>
+                                
+                                <div class="input-group mb-3 w-75 mx-auto">
+                                    <input type="text" id="otpInput" class="form-control" placeholder="Nhập mã OTP 6 số">
+                                    <button class="btn btn-outline-primary" type="button" id="btnSendOTP" onclick="sendRealOTP()">Gửi mã OTP</button>
+                                </div>
+                                <small id="otpMessage" class="text-success d-none">Mã OTP đã được gửi đến email của bạn!</small>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" onclick="goToStep(2)">Quay lại</button>
+                                <button type="button" class="btn btn-success rounded-pill px-4" onclick="confirmAndSubmitBooking()">
+                                    <i class="bi bi-check-circle me-2"></i>Xác Nhận Đặt Tour
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
                 <!-- Price Summary -->
                 <div class="col-lg-4">
-                    <div class="price-summary">
                         <h4 class="price-title">Tóm Tắt Đơn</h4>
                         <div class="price-row">
                             <span>Loại tour</span>
-                            <span>Tour 1 Ngày</span>
+                            <span id="summaryTourType" class="fw-bold text-primary">Tour 1 Ngày</span>
                         </div>
-                        <div class="price-row">
+                    <div class="price-summary sticky-top" style="top: 100px;">
+                    <div class="price-row">
                             <span>Số khách</span>
-                            <span>1 khách</span>
+                            <span id="summaryGuestCount">1 khách</span>
                         </div>
                         <div class="price-row">
                             <span>Ngày khởi hành</span>
-                            <span>---</span>
+                            <span id="summaryDate">---</span>
                         </div>
                         <div class="price-row">
-                            <span>Giá tour</span>
-                            <span>Liên hệ</span>
+                            <span>Giá tour/khách</span>
+                            <span id="summaryUnitPrice">850.000 ₫</span>
                         </div>
                         <div class="price-row">
                             <span>Phí dịch vụ</span>
-                            <span>Miễn phí</span>
+                            <span class="text-success">Miễn phí</span>
                         </div>
+                        <hr>
                         <div class="price-row">
-                            <span>Tổng cộng</span>
-                            <span class="price-total">Liên hệ</span>
+                            <span class="fw-bold fs-5">Tổng cộng</span>
+                            <span class="price-total text-danger fs-4" id="summaryTotal">850.000 ₫</span>
                         </div>
                         <div class="mt-3">
                             <p class="text-muted small mb-0">
-                                <i class="bi bi-shield-check me-1"></i> Đặt tour an toàn, hoàn tiền nếu hủy trước 24h
+                                <i class="bi bi-shield-check me-1 text-success"></i> Đặt tour an toàn, hoàn tiền nếu hủy trước 24h
                             </p>
                         </div>
                     </div>
@@ -313,15 +284,232 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function selectTour(element, type) {
-            document.querySelectorAll('.tour-option').forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
+        // =========================================================================
+        // PHẦN 1: CẤU HÌNH HỆ THỐNG (CHỈ CẦN CHỈNH SỬA Ở ĐÂY)
+        // =========================================================================
+        const APP_CONFIG = {
+            // 1. Cấu hình EmailJS
+            emailJS: {
+                publicKey: "JnpdgbxRChCuxPjup",           // Thay Key của bạn vào đây
+                serviceId: "service_vivudn",           // Thay Service ID vào đây
+                templateOTP: "template_wnwv84v",       // Thay Template ID gửi mã OTP
+                templateBooking: "template_eptcq62"// Thay Template ID gửi xác nhận đặt tour
+            },
+            
+            // 2. Bảng giá Tour (VNĐ) - Nhập 0 nếu muốn hiển thị là "Liên hệ"
+            prices: {
+                'Tour 1 Ngày': 850000,     // 850,000 VNĐ
+                'Tour 2-3 Ngày': 2500000,  // 2,500,000 VNĐ
+                'Tour Tùy Chỉnh': 0        // Hiển thị "Liên hệ"
+            }
+        };
+
+
+        // =========================================================================
+        // PHẦN 2: BIẾN TOÀN CỤC & KHỞI TẠO
+        // =========================================================================
+        let currentStep = 1;
+        let actualOTP = "";
+
+        // Khởi tạo EmailJS ngay khi load file
+        (function() {
+            emailjs.init(APP_CONFIG.emailJS.publicKey);
+        })();
+
+        // Cập nhật lại giá tiền tóm tắt ngay khi trang web vừa tải xong
+        window.onload = function() {
+            updateSummary();
+        };
+
+
+        // =========================================================================
+        // PHẦN 3: XỬ LÝ TÍNH TIỀN & GIAO DIỆN TÓM TẮT ĐƠN
+        // =========================================================================
+        
+        // Hàm format số tiền sang chuẩn Việt Nam (VD: 850.000 ₫)
+        function formatVND(amount) {
+            if (amount === 0) return "Liên hệ";
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
         }
 
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Cảm ơn bạn đã đặt tour! Đội ngũ ViVuDN sẽ liên hệ trong vòng 24 giờ.');
-        });
-    </script>
+        // Hàm khi người dùng click chọn 1 khối Tour
+        function selectTour(element, tourName) {
+            // Xóa class 'selected' ở tất cả các tour
+            document.querySelectorAll('.tour-option').forEach(opt => opt.classList.remove('selected'));
+            // Thêm class 'selected' cho tour vừa click
+            element.classList.add('selected');
+            // Lưu tên tour vào input ẩn
+            document.getElementById('selectedTourType').value = tourName;
+            // Tính lại tiền
+            updateSummary();
+        }
+
+        // Hàm tính toán và hiển thị Tóm tắt đơn
+        function updateSummary() {
+            // 1. Lấy dữ liệu người dùng đang nhập
+            const tourName = document.getElementById('selectedTourType').value;
+            const guestSelect = document.getElementById('cusGuests');
+            const dateInput = document.getElementById('cusDate').value;
+
+            // 2. Xử lý số lượng khách
+            let guestCount = guestSelect ? parseInt(guestSelect.value) : 1;
+            let guestText = guestSelect ? guestSelect.options[guestSelect.selectedIndex].text : "1 khách";
+
+            // 3. Tính tiền dựa vào cấu hình APP_CONFIG phía trên
+            const unitPrice = APP_CONFIG.prices[tourName];
+            const totalPrice = unitPrice > 0 ? unitPrice * guestCount : 0;
+
+            // 4. In thông tin ra HTML
+            document.getElementById('summaryTourType').innerText = tourName;
+            document.getElementById('summaryGuestCount').innerText = guestText;
+            
+            // In ngày tháng
+            if(dateInput) {
+                const dateObj = new Date(dateInput);
+                document.getElementById('summaryDate').innerText = dateObj.toLocaleDateString('vi-VN');
+            } else {
+                document.getElementById('summaryDate').innerText = "---";
+            }
+
+            // In giá tiền
+            if (unitPrice > 0) {
+                document.getElementById('summaryUnitPrice').innerText = formatVND(unitPrice);
+                document.getElementById('summaryTotal').innerText = formatVND(totalPrice);
+            } else {
+                document.getElementById('summaryUnitPrice').innerText = "Liên hệ";
+                document.getElementById('summaryTotal').innerText = "Liên hệ";
+            }
+        }
+
+
+        // =========================================================================
+        // PHẦN 4: XỬ LÝ CHUYỂN BƯỚC (STEPS)
+        // =========================================================================
+        function goToStep(stepNumber) {
+            // Kiểm tra validation ở Bước 2 trước khi cho qua Bước 3
+            if (stepNumber === 3) {
+                const name = document.getElementById('cusName').value;
+                const phone = document.getElementById('cusPhone').value;
+                const email = document.getElementById('cusEmail').value;
+                const date = document.getElementById('cusDate').value;
+                
+                if (!name || !phone || !email || !date) {
+                    alert("Vui lòng điền đầy đủ các trường bắt buộc (*)!");
+                    return;
+                }
+            }
+
+            // Ẩn tất cả nội dung các bước
+            document.querySelectorAll('.step-content').forEach(el => el.style.display = 'none');
+            // Hiện bước muốn tới
+            document.getElementById(`step${stepNumber}`).style.display = 'block';
+
+            // Cập nhật thanh tiến trình (số 1, 2, 3 trên cùng)
+            const indicators = document.querySelectorAll('.step-indicator .step');
+            indicators.forEach((el, index) => {
+                if (index < stepNumber) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+            
+            currentStep = stepNumber;
+        }
+
+
+        // =========================================================================
+        // PHẦN 5: XỬ LÝ XÁC THỰC EMAIL & GỬI THÔNG TIN ĐẶT TOUR
+        // =========================================================================
+        
+        // Gửi mã OTP vào mail người dùng
+        function sendRealOTP() {
+            const userEmail = document.getElementById('cusEmail').value;
+            const btnSend = document.getElementById('btnSendOTP');
+            
+            // Tạo ngẫu nhiên 6 số
+            actualOTP = Math.floor(100000 + Math.random() * 900000).toString();
+            
+            // Đổi trạng thái nút bấm
+            btnSend.disabled = true;
+            btnSend.innerText = "Đang gửi...";
+
+            // Dữ liệu gửi vào Template Email OTP
+            const templateParams = {
+                to_email: userEmail,
+                otp_code: actualOTP,
+                customer_name: document.getElementById('cusName').value
+            };
+
+            // Gửi qua EmailJS
+            emailjs.send(APP_CONFIG.emailJS.serviceId, APP_CONFIG.emailJS.templateOTP, templateParams)
+                .then(function(response) {
+                    document.getElementById('otpMessage').classList.remove('d-none');
+                    btnSend.innerText = "Gửi lại OTP";
+                    btnSend.disabled = false;
+                }, function(error) {
+                    alert("Lỗi! Không thể gửi OTP. Vui lòng kiểm tra lại cấu hình EmailJS.");
+                    console.error("Lỗi EmailJS:", error);
+                    btnSend.innerText = "Gửi mã OTP";
+                    btnSend.disabled = false;
+                });
+        }
+
+        // Xác nhận OTP và gửi thông tin Đặt Tour về mail của bạn/khách
+// Xác nhận OTP và gửi hoá đơn Đặt Tour về mail của khách
+    function confirmAndSubmitBooking() {
+        const userEnteredOTP = document.getElementById('otpInput').value;
+        
+        // Kiểm tra OTP
+        if (!userEnteredOTP) {
+            alert("Vui lòng nhập mã OTP!");
+            return;
+        }
+        if (userEnteredOTP !== actualOTP) {
+            alert("Mã OTP không chính xác. Vui lòng thử lại!");
+            return;
+        }
+
+        // 1. Lấy các thông tin cần thiết để tạo hoá đơn
+        const cusName = document.getElementById('cusName').value;
+        const cusEmail = document.getElementById('cusEmail').value;
+        const tourType = document.getElementById('selectedTourType').value;
+        
+        // Format lại ngày khởi hành cho đẹp
+        const dateInput = document.getElementById('cusDate').value;
+        const travelDate = new Date(dateInput).toLocaleDateString('vi-VN');
+        
+        const guestCount = document.getElementById('cusGuests') ? document.getElementById('cusGuests').value : "1";
+        const totalPrice = document.getElementById('summaryTotal').innerText;
+
+        // 2. Tạo nội dung hoá đơn chi tiết gán vào biến {{message}}
+        const invoiceMessage = `Hệ thống đã ghi nhận yêu cầu đặt tour của bạn. Dưới đây là thông tin chi tiết (Hoá đơn tạm tính):
+- Loại tour: ${tourType}
+- Số khách: ${guestCount} người
+- Ngày khởi hành: ${travelDate}
+- Tổng thanh toán: ${totalPrice}
+
+Đội ngũ chăm sóc khách hàng sẽ liên hệ với bạn trong vòng 24h để xác nhận lịch trình.`;
+
+        // 3. Tạo gói dữ liệu truyền vào Template EmailJS
+        const bookingData = {
+            customer_email: cusEmail, // Dùng để EmailJS biết gửi đến địa chỉ nào
+            customer_name: cusName,   // Truyền vào {{customer_name}} trong template
+            message: invoiceMessage   // Truyền nội dung hoá đơn vào {{message}}
+        };
+
+        alert("Xác thực OTP thành công! Đang gửi hoá đơn đặt tour về email...");
+
+        // 4. Gửi thông tin qua EmailJS
+        emailjs.send(APP_CONFIG.emailJS.serviceId, APP_CONFIG.emailJS.templateBooking, bookingData)
+            .then(function() {
+                alert('Thành công! Hoá đơn đặt tour đã được gửi về email của bạn.');
+                window.location.reload(); // Tải lại trang sau khi thành công
+            }, function(error) {
+                alert('Có lỗi xảy ra khi gửi hoá đơn. Vui lòng thử lại sau.');
+                console.error("Lỗi EmailJS:", error);
+            });
+    }
+</script>
 </body>
 </html>
