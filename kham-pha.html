@@ -34,199 +34,246 @@
     </nav>
 
     <!-- Page Header -->
-    <div class="page-header">
+    <div class="page-header explore-header-refresh">
         <div class="container">
-            <h1 class="text-white mb-3">Khám Phá Đà Nẵng</h1>
-            <p class="text-white-50 mb-0" style="position: relative; z-index: 1;">
-                <strong>Đà nẵng có gì chơi</strong>? Khám phá ngay những địa điểm tuyệt vời nhất!
-            </p>
+            <div class="row align-items-end g-4">
+                <div class="col-lg-7">
+                    <span class="hero-label"><i class="bi bi-map"></i> Khám phá Đà Nẵng</span>
+                    <h1 class="text-white mb-3">Điểm chơi, món ngon và trải nghiệm nên thử</h1>
+                    <p class="text-white-50 mb-0" style="position: relative; z-index: 1;">
+                        Xem nhanh các gợi ý theo nhóm trải nghiệm để chọn lịch trình phù hợp với thời gian của bạn.
+                    </p>
+                </div>
+                <div class="col-lg-5">
+                    <div class="explore-header-card">
+                        <div><strong>8+</strong><span>điểm gợi ý</span></div>
+                        <div><strong>4</strong><span>nhóm trải nghiệm</span></div>
+                        <div><strong>1-3 ngày</strong><span>dễ lên lịch</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Filter -->
-    <section class="py-4 bg-light">
+    <section class="py-4 bg-light explore-filter-section">
         <div class="container">
-            <div class="d-flex flex-wrap gap-3 justify-content-center" id="filter-buttons">
-                <!-- Thêm thuộc tính data-filter để xác định danh mục -->
-                <button class="btn btn-primary filter-btn active" data-filter="all">Tất cả</button>
-                <button class="btn btn-outline-primary filter-btn" data-filter="danh-lam-thang-canh">Danh lam thắng cảnh</button>
-                <button class="btn btn-outline-primary filter-btn" data-filter="bien-dao">Biển & Đảo</button>
-                <button class="btn btn-outline-primary filter-btn" data-filter="van-hoa-lich-su">Văn hóa & Lịch sử</button>
-                <button class="btn btn-outline-primary filter-btn" data-filter="am-thuc">Ẩm thực</button>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                <button class="filter-btn active" type="button" data-scroll-target="danh-sach-kham-pha" aria-pressed="true">Tất cả</button>
+                <button class="filter-btn" type="button" data-scroll-target="chu-de-bien-dao" aria-pressed="false">Biển & Đảo</button>
+                <button class="filter-btn" type="button" data-scroll-target="chu-de-van-hoa" aria-pressed="false">Văn hóa & Lịch sử</button>
+                <button class="filter-btn" type="button" data-scroll-target="chu-de-bieu-tuong" aria-pressed="false">Biểu tượng</button>
+                <button class="filter-btn" type="button" data-scroll-target="chu-de-am-thuc" aria-pressed="false">Ẩm thực</button>
             </div>
         </div>
     </section>
 
-    <!-- Filterable Locations Grid -->
-    <section class="section-padding py-5">
+    <!-- Featured Places -->
+    <section class="section-padding explore-featured-refresh" id="diem-den">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title fw-bold">Khám Phá Đà Nẵng</h2>
-                <p class="text-muted">Chọn danh mục để tìm kiếm các điểm đến phù hợp với bạn</p>
+                <span class="section-kicker">Gợi ý chính</span>
+                <h2 class="section-title">Địa điểm nổi bật</h2>
+                <p class="text-muted">Các điểm dễ ghép lịch trình trong một ngày ở Đà Nẵng</p>
             </div>
-            
-            <div class="row g-4" id="filterable-items">
-                <!-- === DANH LAM THẮNG CẢNH === -->
-                <div class="col-md-6 col-lg-4 filter-item danh-lam-thang-canh">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600" class="card-img-top" alt="Bà Nà Hills" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Bà Nà Hills</h5>
-                            <p class="card-text text-muted">Khu du lịch trên núi với Cầu Vàng huyền thoại và làng Pháp mang đậm phong cách Châu Âu.</p>
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <a href="Trang kham pha/kham-pha-bien-my-khe.html" class="explore-card explore-card-large">
+                        <img src="images/MyKhe.png" alt="Biển Đà Nẵng">
+                        <span class="explore-badge">Nổi bật nhất</span>
+                        <div class="explore-overlay">
+                            <h3 class="explore-title">Biển & Đảo Đà Nẵng</h3>
+                            <p class="explore-text">Bờ biển xanh, bãi cát rộng và nhiều trải nghiệm nhẹ nhàng cho buổi sáng hoặc chiều mát.</p>
+                            <div class="explore-meta">
+                                <span><i class="bi bi-clock"></i> 2-4 giờ</span>
+                                <span><i class="bi bi-geo-alt"></i> Ven biển Đà Nẵng</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-
-                <div class="col-md-6 col-lg-4 filter-item danh-lam-thang-canh">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=600" class="card-img-top" alt="Ngũ Hành Sơn" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Ngũ Hành Sơn</h5>
-                            <p class="card-text text-muted">Quần thể 5 ngọn núi đá vôi với nhiều hang động huyền bí và các ngôi chùa cổ kính.</p>
+                <div class="col-lg-4">
+                    <a href="Trang kham pha/kham-pha-chua-linh-ung.html" class="explore-card explore-card-small mb-4">
+                        <img src="images/chualinhung.png" alt="Chùa Linh Ứng">
+                        <div class="explore-overlay">
+                            <h3 class="explore-title">Chùa Linh Ứng</h3>
+                            <p class="explore-text">Không gian văn hóa, tâm linh và tầm nhìn ra biển.</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 filter-item danh-lam-thang-canh">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://tse3.mm.bing.net/th/id/OIP.ySNrJa5PDbiZsHsZjlUnbgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top" alt="Đèo Hải Vân" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Đèo Hải Vân</h5>
-                            <p class="card-text text-muted">"Thiên hạ đệ nhất hùng quan", cung đường đèo ven biển đẹp nhất Việt Nam.</p>
+                    </a>
+                    <a href="Trang kham pha/kham-pha-cau-rong.html" class="explore-card explore-card-small">
+                        <img src="images/caurong.png" alt="Cầu Rồng">
+                        <div class="explore-overlay">
+                            <h3 class="explore-title">Cầu Rồng</h3>
+                            <p class="explore-text">Điểm dạo đêm quen thuộc bên sông Hàn.</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- === BIỂN VÀ ĐẢO === -->
-                <div class="col-md-6 col-lg-4 filter-item bien-dao">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://havi-web.s3.ap-southeast-1.amazonaws.com/bien_my_khe_da_nang_2_11zon_1_a3a8e98ee1.webp" class="card-img-top" alt="Biển Mỹ Khê" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Biển Mỹ Khê</h5>
-                            <p class="card-text text-muted">Được Forbes bình chọn là một trong những bãi biển quyến rũ nhất hành tinh.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 filter-item bien-dao">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOsFScbkSJ3ic_rrg_AV9u_dnT55I1Of1qJ8tm-5fa8zJE7Fc3Aq5-W_o&s=10" class="card-img-top" alt="Bán đảo Sơn Trà" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Bán đảo Sơn Trà</h5>
-                            <p class="card-text text-muted">Lá phổi xanh của thành phố, nơi có bãi Đa, bãi Rạn và loài voọc chà vá chân nâu quý hiếm.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- === VĂN HÓA LỊCH SỬ === -->
-                <div class="col-md-6 col-lg-4 filter-item van-hoa-lich-su">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://vcdn1-vnexpress.vnecdn.net/2024/02/06/DSCF5526-JPG-1502-1707225248.jpg?w=680&h=0&q=100&dpr=2&fit=crop&s=2ZqbwMeiJdVTvN6b5l-ijw" class="card-img-top" alt="Cầu Rồng" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Cầu Rồng</h5>
-                            <p class="card-text text-muted">Biểu tượng của Đà Nẵng vươn mình, đặc biệt với màn trình diễn phun lửa và nước vào cuối tuần.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 filter-item van-hoa-lich-su">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://media-cdn-v2.laodong.vn/Storage/newsportal/2019/3/1/659956/Anh-3.jpg" class="card-img-top" alt="Bảo tàng Chăm" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Bảo tàng Điêu khắc Chăm</h5>
-                            <p class="card-text text-muted">Nơi lưu giữ những hiện vật điêu khắc nghệ thuật vô giá của Vương quốc Chăm Pa xưa.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- === ẨM THỰC === -->
-                <div class="col-md-6 col-lg-4 filter-item am-thuc">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK3eRAU8WOX3SZUn15r9s1O1sUuMFg9KtpmVIOLSVBWF0_azppMjOS0yE&s=10" class="card-img-top" alt="Chợ Cồn" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Thiên đường ẩm thực Chợ Cồn</h5>
-                            <p class="card-text text-muted">Nơi hội tụ hàng trăm món ăn vặt ngon rẻ nức tiếng: ốc hút, bánh bèo, bánh xèo, chè...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 filter-item am-thuc">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6x1Fm1m6CkVOKH6U6EAIs5jLr_wEo4xPAdcipSeDdTR8z6xuEPGqYycc&s=10" class="card-img-top" alt="Hải sản Năm Đảnh" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Khu phố Hải Sản</h5>
-                            <p class="card-text text-muted">Thưởng thức hải sản tươi sống được đánh bắt trong ngày tại các quán ven biển.</p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- More Locations -->
-    <section class="section-padding bg-light">
+    <section class="section-padding bg-light explore-list-refresh" id="danh-sach-kham-pha">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">Khám Phá Thêm</h2>
+                <span class="section-kicker">Danh sách nhanh</span>
+                <h2 class="section-title">Khám phá thêm</h2>
+                <p class="text-muted">Mỗi mục đã được nối tới trang chi tiết để bạn xem thêm thông tin, lịch trình và kinh nghiệm đi.</p>
             </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="location-card">
-                        <img src="images/nonnuoc.png" alt="Non Nước">
-                        <div class="location-content">
-                            <h4 class="location-title">Bãi Biển Non Nước</h4>
-                            <p class="location-text">Bãi biển hoang sơ yên tĩnh, lý tưởng cho những ai muốn tránh đám đông.</p>
-                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+            <div class="explore-topic-stack">
+                <div class="explore-topic-group" id="chu-de-bien-dao">
+                    <div class="explore-topic-heading">
+                        <div>
+                            <span class="section-kicker">Biển & Đảo</span>
+                            <h3>Không gian biển và trải nghiệm mặt nước</h3>
+                        </div>
+                        <span class="topic-count">3 gợi ý</span>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-bien-my-khe.html">
+                                <img src="images/MyKhe.png" alt="Biển Mỹ Khê">
+                                <div class="location-content">
+                                    <span class="location-tag">Biển</span>
+                                    <h4 class="location-title">Biển Mỹ Khê</h4>
+                                    <p class="location-text">Bãi biển gần trung tâm, hợp để ngắm bình minh, tắm biển và ăn hải sản.</p>
+                                    <a href="Trang kham pha/kham-pha-bien-my-khe.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-non-nuoc.html">
+                                <img src="images/nonnuoc.png" alt="Non Nước">
+                                <div class="location-content">
+                                    <span class="location-tag">Biển</span>
+                                    <h4 class="location-title">Bãi Biển Non Nước</h4>
+                                    <p class="location-text">Bãi biển hoang sơ yên tĩnh, lý tưởng cho những ai muốn tránh đám đông.</p>
+                                    <a href="Trang kham pha/kham-pha-non-nuoc.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="tim-du-thuyen.html">
+                                <img src="images/duthuyen2.png" alt="Du thuyền Đà Nẵng">
+                                <div class="location-content">
+                                    <span class="location-tag">Trải nghiệm</span>
+                                    <h4 class="location-title">Trải Nghiệm Biển</h4>
+                                    <p class="location-text">Lặn ngắm san hô, câu cá, tắm biển cùng ViVuDN.</p>
+                                    <a href="tim-du-thuyen.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="location-card">
-                        <img src="images/chualinhung.png" alt="Chùa Linh Ứng">
-                        <div class="location-content">
-                            <h4 class="location-title">Chùa Linh Ứng</h4>
-                            <p class="location-text">Ngôi chùa nổi tiếng với tượng Phật Bà Quan Âm cao 67m.</p>
-                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+
+                <div class="explore-topic-group" id="chu-de-van-hoa">
+                    <div class="explore-topic-heading">
+                        <div>
+                            <span class="section-kicker">Văn hóa & Lịch sử</span>
+                            <h3>Chùa, phố cổ, danh thắng và cung đường xanh</h3>
+                        </div>
+                        <span class="topic-count">5 gợi ý</span>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-ba-na-hills.html">
+                                <img src="images/BaNa.png" alt="Bà Nà Hills">
+                                <div class="location-content">
+                                    <span class="location-tag">Danh lam</span>
+                                    <h4 class="location-title">Bà Nà Hills</h4>
+                                    <p class="location-text">Cầu Vàng, làng Pháp, cáp treo và không khí mát lạnh trên đỉnh núi.</p>
+                                    <a href="Trang kham pha/kham-pha-ba-na-hills.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-ngu-hanh-son.html">
+                                <img src="images/HanhSon.png" alt="Ngũ Hành Sơn">
+                                <div class="location-content">
+                                    <span class="location-tag">Văn hóa</span>
+                                    <h4 class="location-title">Ngũ Hành Sơn</h4>
+                                    <p class="location-text">Cụm núi đá vôi, hang động, chùa cổ và làng đá Non Nước.</p>
+                                    <a href="Trang kham pha/kham-pha-ngu-hanh-son.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-chua-linh-ung.html">
+                                <img src="images/chualinhung.png" alt="Chùa Linh Ứng">
+                                <div class="location-content">
+                                    <span class="location-tag">Tâm linh</span>
+                                    <h4 class="location-title">Chùa Linh Ứng</h4>
+                                    <p class="location-text">Ngôi chùa nổi tiếng với tượng Phật Bà Quan Âm cao 67m.</p>
+                                    <a href="Trang kham pha/kham-pha-chua-linh-ung.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-hoi-an.html">
+                                <img src="images/phoco.png" alt="Hội An">
+                                <div class="location-content">
+                                    <span class="location-tag">Gần Đà Nẵng</span>
+                                    <h4 class="location-title">Phố Cổ Hội An</h4>
+                                    <p class="location-text">Di sản thế giới UNESCO, cách Đà Nẵng 30km.</p>
+                                    <a href="Trang kham pha/kham-pha-hoi-an.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-son-tra.html">
+                                <img src="images/SonTra.png" alt="Bán đảo Sơn Trà">
+                                <div class="location-content">
+                                    <span class="location-tag">Thiên nhiên</span>
+                                    <h4 class="location-title">Bán Đảo Sơn Trà</h4>
+                                    <p class="location-text">Cung đường xanh có biển, rừng, điểm ngắm cảnh và nhiều góc check-in.</p>
+                                    <a href="Trang kham pha/kham-pha-son-tra.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="location-card">
-                        <img src="images/caurong.png" alt="Cầu Rồng">
-                        <div class="location-content">
-                            <h4 class="location-title">Cầu Rồng Đà Nẵng</h4>
-                            <p class="location-text">Biểu tượng của thành phố với màn phun lửa nước vào thứ 7, CN.</p>
-                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+
+                <div class="explore-topic-group" id="chu-de-bieu-tuong">
+                    <div class="explore-topic-heading">
+                        <div>
+                            <span class="section-kicker">Biểu tượng</span>
+                            <h3>Điểm nhận diện nổi bật của thành phố</h3>
+                        </div>
+                        <span class="topic-count">1 gợi ý</span>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-cau-rong.html">
+                                <img src="images/caurong.png" alt="Cầu Rồng">
+                                <div class="location-content">
+                                    <span class="location-tag">Biểu tượng</span>
+                                    <h4 class="location-title">Cầu Rồng Đà Nẵng</h4>
+                                    <p class="location-text">Biểu tượng của thành phố với màn phun lửa nước vào thứ 7, CN.</p>
+                                    <a href="Trang kham pha/kham-pha-cau-rong.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="location-card">
-                        <img src="images/phoco.png" alt="Hội An">
-                        <div class="location-content">
-                            <h4 class="location-title">Phố Cổ Hội An</h4>
-                            <p class="location-text">Di sản thế giới UNESCO, cách Đà Nẵng 30km.</p>
-                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+
+                <div class="explore-topic-group" id="chu-de-am-thuc">
+                    <div class="explore-topic-heading">
+                        <div>
+                            <span class="section-kicker">Ẩm thực</span>
+                            <h3>Món địa phương nên thử trong chuyến đi</h3>
                         </div>
+                        <span class="topic-count">1 gợi ý</span>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="location-card">
-                        <img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=600" alt="Ẩm thực">
-                        <div class="location-content">
-                            <h4 class="location-title">Đặc Sản Đà Nẵng</h4>
-                            <p class="location-text">Bánh tráng cuốn, bún chả cá, mì Quảng...</p>
-                            <a href="#" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="location-card">
-                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600" alt="Du thuyền">
-                        <div class="location-content">
-                            <h4 class="location-title">Trải Nghiệm Biển</h4>
-                            <p class="location-text">Lặn ngắm san hô, câu cá, tắm biển cùng ViVuDN.</p>
-                            <a href="tim-du-thuyen.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="location-card" data-card-link="Trang kham pha/kham-pha-am-thuc-da-nang.html">
+                                <img src="images/miquang.png" alt="Ẩm thực Đà Nẵng">
+                                <div class="location-content">
+                                    <span class="location-tag">Ẩm thực</span>
+                                    <h4 class="location-title">Đặc Sản Đà Nẵng</h4>
+                                    <p class="location-text">Bánh tráng cuốn, bún chả cá, mì Quảng...</p>
+                                    <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="location-link">Tìm hiểu thêm <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -235,7 +282,7 @@
     </section>
 
     <!-- Food Section -->
-    <section class="section-padding">
+    <section class="section-padding" id="am-thuc">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title">Ẩm Thực Đà Nẵng</h2>
@@ -243,53 +290,58 @@
             </div>
             <div class="row g-3">
                 <div class="col-6 col-md-4 col-lg-2">
-                    <div class="food-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoTeeN1Q2uORt8wjcH-SLxl22mbI35Cv1zPWDrPOFxQkwp-ai5V2dQBNE&s=10" alt="Bánh tráng">
+                    <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="food-card">
+                        <img src="images/miquang.png" alt="Bánh tráng">
                         <div class="food-overlay">
-                            <p class="food-name">Bánh Tráng Kẹp</p>
+                            <p class="food-name">Bánh Tráng</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <div class="food-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9C1duP6mWSf0PxhMx-gkmcv3xV5TdEaFEvAPQDFKleg&s=10 alt="Bún chả cá">
+                    <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="food-card">
+                        <img src="images/biendao.png" alt="Bún chả cá">
                         <div class="food-overlay">
                             <p class="food-name">Bún Chả Cá</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <div class="food-card">
+                    <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="food-card">
                         <img src="images/miquang.png" alt="Mì Quảng">
                         <div class="food-overlay">
                             <p class="food-name">Mì Quảng</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <div class="food-card">
-                        <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2020/9/24/838862/Haisan.jpg" alt="Hải s    ản">
+                    <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="food-card">
+                        <img src="images/biendao.png" alt="Hải sản">
                         <div class="food-overlay">
                             <p class="food-name">Hải Sản</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <div class="food-card">
+                    <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="food-card">
                         <img src="images/banhxeo.png" alt="Bánh xèo">
                         <div class="food-overlay">
                             <p class="food-name">Bánh Xèo</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-md-4 col-lg-2">
-                    <div class="food-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0rmQSKz7olsoPlwYoUc9820vm84z685Mq_EoPFuregOz8XwFGd24FOK_O&s=10" alt="Bánh mì">
+                    <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="food-card">
+                        <img src="images/phoco.png" alt="Bánh mì">
                         <div class="food-overlay">
                             <p class="food-name">Bánh Mì</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="Trang kham pha/kham-pha-am-thuc-da-nang.html" class="btn btn-outline-primary rounded-pill px-4">
+                    Xem cẩm nang ẩm thực <i class="bi bi-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -352,34 +404,52 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const filterBtns = document.querySelectorAll('.filter-btn');
-                const filterItems = document.querySelectorAll('.filter-item');
+        const filterButtons = document.querySelectorAll('[data-scroll-target]');
+        const topicGroups = document.querySelectorAll('.explore-topic-group');
+        const locationCards = document.querySelectorAll('[data-card-link]');
 
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 1. Xử lý giao diện nút bấm (chuyển màu nút đang active)
-                        filterBtns.forEach(b => {
-                            b.classList.remove('btn-primary', 'active');
-                            b.classList.add('btn-outline-primary');
-                        });
-                        this.classList.remove('btn-outline-primary');
-                        this.classList.add('btn-primary', 'active');
+        filterButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.scrollTarget;
+                const target = document.getElementById(targetId);
 
-                        // 2. Xử lý việc ẩn/hiện các địa điểm
-                        const filterValue = this.getAttribute('data-filter');
-
-                        filterItems.forEach(item => {
-                            // Nếu chọn 'all' hoặc thẻ div có chứa class trùng với data-filter
-                            if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                                item.style.display = 'block';
-                            } else {
-                                item.style.display = 'none';
-                            }
-                        });
-                    });
+                filterButtons.forEach((item) => {
+                    item.classList.remove('active');
+                    item.setAttribute('aria-pressed', 'false');
                 });
+
+                button.classList.add('active');
+                button.setAttribute('aria-pressed', 'true');
+
+                topicGroups.forEach((group) => group.classList.remove('is-focused'));
+
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    if (target.classList.contains('explore-topic-group')) {
+                        target.classList.add('is-focused');
+                        window.setTimeout(() => target.classList.remove('is-focused'), 1600);
+                    }
+                }
             });
+        });
+
+        locationCards.forEach((card) => {
+            card.setAttribute('role', 'link');
+            card.setAttribute('tabindex', '0');
+
+            card.addEventListener('click', (event) => {
+                if (event.target.closest('a')) return;
+                window.location.href = card.dataset.cardLink;
+            });
+
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    window.location.href = card.dataset.cardLink;
+                }
+            });
+        });
     </script>
 </body>
 </html>
