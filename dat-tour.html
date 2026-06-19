@@ -98,6 +98,20 @@
                                 </div>
                                 
                                 <input type="hidden" id="selectedTourType" value="Tour 1 Ngày">
+
+                                <h5 class="form-section-title mt-4"><i class="bi bi-water"></i> Dịch Vụ Kèm Theo (Tùy chọn)</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Chọn du thuyền (Tính nguyên chuyến/boat)</label>
+                                        <select class="form-select" id="selectedYacht" onchange="updateSummary()">
+                                            <option value="none" selected>Không thuê du thuyền</option>
+                                            <option value="vip_sunset">Du Thuyền VIP Sunset (8.500.000 ₫)</option>
+                                            <option value="luxury">Du Thuyền Luxury 5 Sao (15.000.000 ₫)</option>
+                                            <option value="fishing">Thuyền Câu Cá Chuyên Nghiệp (3.500.000 ₫)</option>
+                                            <option value="family">Du Thuyền Gia Đình (5.500.000 ₫)</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 
                             </div>
                             
@@ -186,6 +200,15 @@
                         </div>
                         <div class="price-row">
                             <span>Giá tour/khách</span>
+                            <div class="price-row" id="summaryYachtRow" style="display: none;">
+                                <span>Du thuyền</span>
+                                <span id="summaryYachtPrice" class="text-primary">0 ₫</span>
+                            </div>
+
+                            <div class="price-row">
+                                <span>Giá tour/khách</span>
+                                <span id="summaryUnitPrice">850.000 ₫</span>
+                            </div>
                             <span id="summaryUnitPrice">850.000 ₫</span>
                         </div>
                         <div class="price-row">
@@ -302,6 +325,15 @@
                 'Tour 2-3 Ngày': 2500000,  // 2,500,000 VNĐ
                 'Tour Tùy Chỉnh': 0        // Hiển thị "Liên hệ"
             }
+
+            // 3. THÊM MỚI: Bảng giá Du thuyền (VNĐ / nguyên chuyến)
+            yachtPrices: {
+                'none': { name: 'Không thuê', price: 0 },
+                'vip_sunset': { name: 'Du Thuyền VIP Sunset', price: 8500000 },
+                'luxury': { name: 'Du Thuyền Luxury 5 Sao', price: 15000000 },
+                'fishing': { name: 'Thuyền Câu Cá', price: 3500000 },
+                'family': { name: 'Du Thuyền Gia Đình', price: 5500000 }
+            }
         };
 
 
@@ -350,16 +382,31 @@
             const tourName = document.getElementById('selectedTourType').value;
             const guestSelect = document.getElementById('cusGuests');
             const dateInput = document.getElementById('cusDate').value;
+            const yachtSelect = document.getElementById('selectedYacht'); // Thêm phần lấy dữ liệu du thuyền
 
             // 2. Xử lý số lượng khách
             let guestCount = guestSelect ? parseInt(guestSelect.value) : 1;
             let guestText = guestSelect ? guestSelect.options[guestSelect.selectedIndex].text : "1 khách";
 
-            // 3. Tính tiền dựa vào cấu hình APP_CONFIG phía trên
+            // 3. Tính tiền Tour
             const unitPrice = APP_CONFIG.prices[tourName];
-            const totalPrice = unitPrice > 0 ? unitPrice * guestCount : 0;
+            const tourTotalPrice = unitPrice > 0 ? unitPrice * guestCount : 0;
 
-            // 4. In thông tin ra HTML
+            // 4. Tính tiền Du Thuyền
+            let yachtPrice = 0;
+            if (yachtSelect && yachtSelect.value !== 'none') {
+                yachtPrice = APP_CONFIG.yachtPrices[yachtSelect.value].price;
+                document.getElementById('summaryYachtRow').style.display = 'flex';
+                document.getElementById('summaryYachtPrice').innerText = formatVND(yachtPrice);
+            } else {
+                const yachtRow = document.getElementById('summaryYachtRow');
+                if (yachtRow) yachtRow.style.display = 'none';
+            }
+
+            // 5. Tính TỔNG TIỀN (Tour + Du thuyền)
+            const finalTotalPrice = tourTotalPrice + yachtPrice;
+
+            // 6. In thông tin ra HTML
             document.getElementById('summaryTourType').innerText = tourName;
             document.getElementById('summaryGuestCount').innerText = guestText;
             
@@ -372,9 +419,9 @@
             }
 
             // In giá tiền
-            if (unitPrice > 0) {
-                document.getElementById('summaryUnitPrice').innerText = formatVND(unitPrice);
-                document.getElementById('summaryTotal').innerText = formatVND(totalPrice);
+            if (unitPrice > 0 || yachtPrice > 0) {
+                document.getElementById('summaryUnitPrice').innerText = unitPrice > 0 ? formatVND(unitPrice) : "Liên hệ";
+                document.getElementById('summaryTotal').innerText = finalTotalPrice > 0 ? formatVND(finalTotalPrice) : "Liên hệ";
             } else {
                 document.getElementById('summaryUnitPrice').innerText = "Liên hệ";
                 document.getElementById('summaryTotal').innerText = "Liên hệ";
@@ -456,7 +503,7 @@
         }
 
         // Xác nhận OTP và gửi thông tin Đặt Tour về mail của bạn/khách
-// Xác nhận OTP và gửi hoá đơn Đặt Tour về mail của khách
+        // Xác nhận OTP và gửi hoá đơn Đặt Tour về mail của khách
     function confirmAndSubmitBooking() {
         const userEnteredOTP = document.getElementById('otpInput').value;
         
@@ -474,6 +521,7 @@
         const cusName = document.getElementById('cusName').value;
         const cusEmail = document.getElementById('cusEmail').value;
         const tourType = document.getElementById('selectedTourType').value;
+        const yachtSelect = document.getElementById('selectedYacht'); // Thêm phần lấy dữ liệu du thuyền
         
         // Format lại ngày khởi hành cho đẹp
         const dateInput = document.getElementById('cusDate').value;
@@ -482,20 +530,28 @@
         const guestCount = document.getElementById('cusGuests') ? document.getElementById('cusGuests').value : "1";
         const totalPrice = document.getElementById('summaryTotal').innerText;
 
+        // Lấy thông tin du thuyền nếu có thuê
+        let yachtInfoText = "Không";
+        if (yachtSelect && yachtSelect.value !== 'none') {
+            const yachtObj = APP_CONFIG.yachtPrices[yachtSelect.value];
+            yachtInfoText = `${yachtObj.name} (+${formatVND(yachtObj.price)})`;
+        }
+
         // 2. Tạo nội dung hoá đơn chi tiết gán vào biến {{message}}
         const invoiceMessage = `Hệ thống đã ghi nhận yêu cầu đặt tour của bạn. Dưới đây là thông tin chi tiết (Hoá đơn tạm tính):
-- Loại tour: ${tourType}
-- Số khách: ${guestCount} người
-- Ngày khởi hành: ${travelDate}
-- Tổng thanh toán: ${totalPrice}
+    - Loại tour: ${tourType}
+    - Số khách: ${guestCount} người
+    - Ngày khởi hành: ${travelDate}
+    - Dịch vụ du thuyền: ${yachtInfoText}
+    - Tổng thanh toán: ${totalPrice}
 
-Đội ngũ chăm sóc khách hàng sẽ liên hệ với bạn trong vòng 24h để xác nhận lịch trình.`;
+    Đội ngũ chăm sóc khách hàng sẽ liên hệ với bạn trong vòng 24h để xác nhận lịch trình.`;
 
         // 3. Tạo gói dữ liệu truyền vào Template EmailJS
         const bookingData = {
-            customer_email: cusEmail, // Dùng để EmailJS biết gửi đến địa chỉ nào
-            customer_name: cusName,   // Truyền vào {{customer_name}} trong template
-            message: invoiceMessage   // Truyền nội dung hoá đơn vào {{message}}
+            customer_email: cusEmail, 
+            customer_name: cusName,   
+            message: invoiceMessage   
         };
 
         alert("Xác thực OTP thành công! Đang gửi hoá đơn đặt tour về email...");
@@ -504,7 +560,7 @@
         emailjs.send(APP_CONFIG.emailJS.serviceId, APP_CONFIG.emailJS.templateBooking, bookingData)
             .then(function() {
                 alert('Thành công! Hoá đơn đặt tour đã được gửi về email của bạn.');
-                window.location.reload(); // Tải lại trang sau khi thành công
+                window.location.reload(); 
             }, function(error) {
                 alert('Có lỗi xảy ra khi gửi hoá đơn. Vui lòng thử lại sau.');
                 console.error("Lỗi EmailJS:", error);
