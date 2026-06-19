@@ -855,6 +855,20 @@ body.auth-page {
     align-items: center;
 }
 
+.yacht-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.yacht-rating i {
+    font-size: 0.9rem;
+}
+
+.yacht-rating span {
+    font-size: 0.85rem;
+}
+
 .price {
     font-size: 1.5rem;
     font-weight: 700;
