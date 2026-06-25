@@ -434,6 +434,11 @@
         // =========================================================================
         // PHẦN 4: XỬ LÝ CHUYỂN BƯỚC (STEPS)
         // =========================================================================
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+            }
+        
         function goToStep(stepNumber) {
             // Kiểm tra validation ở Bước 2 trước khi cho qua Bước 3
             if (stepNumber === 3) {
