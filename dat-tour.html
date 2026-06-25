@@ -441,6 +441,22 @@
                 const phone = document.getElementById('cusPhone').value;
                 const email = document.getElementById('cusEmail').value;
                 const date = document.getElementById('cusDate').value;
+
+                if (!validateEmail(email)) {
+                    alert("Email không hợp lệ!");
+                    return;
+                }
+
+                const selectedDate = new Date(date);
+                const today = new Date();
+
+                // Đưa ngày hiện tại về 00:00:00
+                today.setHours(0, 0, 0, 0);
+
+                if (selectedDate <= today) {
+                    alert("Ngày khởi hành phải sau ngày hôm nay!");
+                    return;
+                }
                 
                 if (!name || !phone || !email || !date) {
                     alert("Vui lòng điền đầy đủ các trường bắt buộc (*)!");
